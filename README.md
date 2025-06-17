@@ -15,52 +15,53 @@
 
 ---
 
-🚀 Project Steps
-Exploratory Data Analysis
+## 🚀 Project Steps
 
-Visualized class imbalance in train/
+1. **Exploratory Data Analysis**
 
-Previewed sample images by class
+  - Visualized class imbalance in train/
+    
+  - Previewed sample images by class
 
-Image Preprocessing
+2. **Image Preprocessing**
 
-Resized all images to 224x224
+  - Resized all images to 224x224
+  
+  - Normalized pixel values to [0, 1]
+  
+  - Applied data augmentation using ImageDataGenerator
 
-Normalized pixel values to [0, 1]
+3. **Model 1: Simple CNN**
 
-Applied data augmentation using ImageDataGenerator
+  - 3 Conv2D blocks (Conv → BatchNorm → MaxPooling)
+  
+  - Dense(256) + Dropout(0.5)
+  
+  - Output: Dense(12, softmax)
+  
+  - Optimizer: Adam, Loss: categorical_crossentropy
 
-Model 1: Simple CNN
+4. **Model 2: MobileNetV2**
 
-3 Conv2D blocks (Conv → BatchNorm → MaxPooling)
+  - Pretrained on ImageNet, top removed
+    
+  - Frozen all convolutional layers
+    
+  - Added custom dense head: GAP → Dropout(0.3) → Dense(512) → Dense(12, softmax)
+    
+  - Used Adam(lr=1e-4) for stable fine-tuning
 
-Dense(256) + Dropout(0.5)
+5. **Training & Evaluation**
 
-Output: Dense(12, softmax)
+  - Used EarlyStopping and ModelCheckpoint
+    
+  - Compared accuracy/loss curves across both models
+    
+  - MobileNetV2 outperformed the custom CNN
 
-Optimizer: Adam, Loss: categorical_crossentropy
+6. **Kaggle Submission**
 
-Model 2: MobileNetV2
-
-Pretrained on ImageNet, top removed
-
-Frozen all convolutional layers
-
-Added custom dense head: GAP → Dropout(0.3) → Dense(512) → Dense(12, softmax)
-
-Used Adam(lr=1e-4) for stable fine-tuning
-
-Training & Evaluation
-
-Used EarlyStopping and ModelCheckpoint
-
-Compared accuracy/loss curves across both models
-
-MobileNetV2 outperformed the custom CNN
-
-Kaggle Submission
-
-Simple CNN: accuracy = 71.91%
-
-MobileNetV2: accuracy = 76.70% ✅
+  - Simple CNN: accuracy = 71.91%
+    
+  - MobileNetV2: accuracy = 76.70% ✅
 
