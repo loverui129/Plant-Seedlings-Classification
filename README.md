@@ -15,34 +15,52 @@
 
 ---
 
-## 🚀 Project Steps
+🚀 Project Steps
+Exploratory Data Analysis
 
-### 1. Exploratory Data Analysis
-- Visualized class imbalance in `train/`
-- Sample image preview per class
+Visualized class imbalance in train/
 
-### 2. Image Preprocessing
-- Resized images to `224x224`
-- Normalized pixel values to `[0, 1]`
-- Applied strong data augmentation with `ImageDataGenerator`
+Previewed sample images by class
 
-### 3. Model Architecture
-- `Conv2D + BatchNorm + MaxPooling` × 3 blocks
-- Fully connected layer with `Dropout(0.5)`
-- Output layer: `Dense(12, softmax)`
-- Compiled with `Adam` optimizer + `categorical_crossentropy`
+Image Preprocessing
 
-### 4. Training
-- Used `EarlyStopping` and `ModelCheckpoint`
-- Trained for up to 20 epochs on 80% training data
-- Saved the best model as `best_cnn_model.keras`
+Resized all images to 224x224
 
-### 5. Evaluation
-- Plotted accuracy/loss curves
-- Validation accuracy improved steadily to 73.5%
-- No major overfitting observed
+Normalized pixel values to [0, 1]
 
-### 6. Prediction & Submission
-- Loaded test images from `test/`
-- Predicted class labels using the best model
-- Exported `submission.csv` (Kaggle format)
+Applied data augmentation using ImageDataGenerator
+
+Model 1: Simple CNN
+
+3 Conv2D blocks (Conv → BatchNorm → MaxPooling)
+
+Dense(256) + Dropout(0.5)
+
+Output: Dense(12, softmax)
+
+Optimizer: Adam, Loss: categorical_crossentropy
+
+Model 2: MobileNetV2
+
+Pretrained on ImageNet, top removed
+
+Frozen all convolutional layers
+
+Added custom dense head: GAP → Dropout(0.3) → Dense(512) → Dense(12, softmax)
+
+Used Adam(lr=1e-4) for stable fine-tuning
+
+Training & Evaluation
+
+Used EarlyStopping and ModelCheckpoint
+
+Compared accuracy/loss curves across both models
+
+MobileNetV2 outperformed the custom CNN
+
+Kaggle Submission
+
+Simple CNN: accuracy = 71.91%
+
+MobileNetV2: accuracy = 76.70% ✅
+
