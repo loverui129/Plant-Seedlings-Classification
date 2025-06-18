@@ -7,11 +7,15 @@
 - **Task**: Image classification – predict plant species from seedling images
 - **Dataset**: 5,475 training images across 12 categories (e.g. Sugar beet, Maize, Loose Silky-bent), plus 794 unlabeled test images
 - **Framework**: TensorFlow / Keras
-- **Model**: Simple CNN with 3 convolutional blocks + BatchNorm + Dropout
+- **Model**:
+
+    - ✅ Model 1 – Simple CNN: 3 convolutional blocks + BatchNorm + Dropout
+
+    - ✅ Model 2 – MobileNetV2: Pretrained on ImageNet with a custom dense head
 - **Augmentation**: Rotation, zoom, shift, brightness, flip
 - **Performance**:  
-  - Validation Accuracy: **73.5%**  
-  - Final Kaggle Score: **0.76826**
+  - Validation Accuracy: **75.7%**  
+  - Final Kaggle Score: **0.76700 ✅ (Best)**
 
 ---
 
